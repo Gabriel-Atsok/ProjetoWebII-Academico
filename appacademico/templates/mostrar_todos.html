@@ -78,8 +78,8 @@
                                 <td>{{professor.telefone}}</td>
                                 <td>{{professor.email}}</td>
                                 <td>
-                                    <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
-                                    <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                    <a href="" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                 </td>
                             </tr>
                             {% endfor %}
@@ -92,8 +92,8 @@
                                     <td>{{aluno.telefone}}</td>
                                     <td>{{aluno.email}}</td>
                                     <td>
-                                        <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
-                                        <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                        <a href="#" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -104,8 +104,8 @@
                                     <td>{{disciplina.nome_disciplina}}</td>
                                     <td>{{disciplina.professor}}</td>
                                     <td>
-                                        <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
-                                        <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                        <a href="{% url 'editar_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -114,6 +114,10 @@
                                 <tr>
                                     <td>{{turma.turma_id}}</td>
                                     <td>{{turma.disciplina_id}}</td>
+                                    <td>
+                                        <a href="#" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% endif %}

@@ -76,15 +76,15 @@ def turmas(request):
     return render(request, 'mostrar_todos.html', {'turma': turma})
 
 def editar_disciplina(request, disciplina_id):
-    # produto = Produto.objects.get(id=produto_id)
-    disciplinaobject = get_object_or_404(Disciplina, id=disciplina_id)
-    disciplinaform = DisciplinaModelForm(request.POST or None, request.FILES or None, instance=disciplina)
-    if disciplinaform.is_valid():
+    disciplinaobject = get_object_or_404(Disciplina, disciplina_id=disciplina_id)
+    print("ATE AQU FOI---------------------------------------------------------------------------------------------------------------------------------------")
+    disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None, instance=disciplinaobject)
+    if disciplina.is_valid():
         disciplinaobject.save()
-        messages.success(request, f'{disciplinaobject.nome.upper()} editada com sucesso!')
-        return redirect('disciplina')
-
-    return render(request,'editar_todos.html', {'disciplinaobject': disciplinaobject, 'disciplinaform': disciplinaform})
+        messages.success(request, f'{disciplinaobject.nome_disciplina.upper()} editada com sucesso!')
+        return redirect('disciplinas')
+#AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+    return render(request,'editar_todos.html', {'disciplinaobject': disciplinaobject, 'disciplina': disciplina})
 
 def resetsenha(request):
     return render(request, 'password.html')
