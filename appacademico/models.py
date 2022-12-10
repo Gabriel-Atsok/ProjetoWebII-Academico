@@ -30,8 +30,8 @@ class Disciplina(models.Model):
     
 
 class Turma(models.Model):
-    turma_id = models.AutoField(primary_key=True)
+    turma_id = models.CharField(primary_key=True, max_length=150)
     disciplina_id = models.ForeignKey(Disciplina, on_delete=models.PROTECT)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.turma_id

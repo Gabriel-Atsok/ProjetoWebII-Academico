@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -39,14 +39,25 @@ def registrardicente(request):
 
 def registrardisciplina(request):
     if request.method == "POST":
-        disciplinas = DisciplinaModelForm(request.POST, request.FILES)
-        if disciplinas.is_valid():
-            disciplinas.save()
+        disciplina = DisciplinaModelForm(request.POST, request.FILES)
+        if disciplina.is_valid():
+            disciplina.save()
             messages.add_message(request, messages.SUCCESS,'Disciplina cadastrada com sucesso!')
             return render(request, 'index.html')
     else:
-        disciplinas = DisciplinaModelForm()
-        return render(request, 'register.html', {'disciplinas': disciplinas})
+        disciplina = DisciplinaModelForm()
+        return render(request, 'register.html', {'disciplina': disciplina})
+
+def registrarturma(request):
+    if request.method == "POST":
+        turma = TurmaModelForm(request.POST, request.FILES)
+        if turma.is_valid():
+            turma.save()
+            messages.add_message(request, messages.SUCCESS,'Disciplina cadastrada com sucesso!')
+            return render(request, 'index.html')
+    else:
+        turma = TurmaModelForm()
+        return render(request, 'register.html', {'turma': turma})
 
 def docentes(request):
     docente = Professor.objects.all()
@@ -59,6 +70,21 @@ def dicentes(request):
 def disciplinas(request):
     disciplina = Disciplina.objects.all()
     return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
+
+def turmas(request):
+    turma = Turma.objects.all()
+    return render(request, 'mostrar_todos.html', {'turma': turma})
+
+def editar_disciplina(request, disciplina_id):
+    # produto = Produto.objects.get(id=produto_id)
+    disciplinaobject = get_object_or_404(Disciplina, id=disciplina_id)
+    disciplinaform = DisciplinaModelForm(request.POST or None, request.FILES or None, instance=disciplina)
+    if disciplinaform.is_valid():
+        disciplinaobject.save()
+        messages.success(request, f'{disciplinaobject.nome.upper()} editada com sucesso!')
+        return redirect('disciplina')
+
+    return render(request,'editar_todos.html', {'disciplinaobject': disciplinaobject, 'disciplinaform': disciplinaform})
 
 def resetsenha(request):
     return render(request, 'password.html')

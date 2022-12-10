@@ -7,22 +7,26 @@
         Cadastrar Docente
     {% elif dicente %}
         Cadastrar Dicente
-    {% elif  disciplinas%}
+    {% elif  disciplina %}
         Cadastrar Disciplina
     {% elif dicente %}
         Cadastrar Aluno
-{% endif %}
+    {% elif turma %}
+        Cadastrar Turma
+    {% endif %}
 {% endblock %}
 
 {% block li %}
     {% if docente %}
-    Cadastrar Docente
+        Cadastrar Docente
     {% elif dicente %}
-    Cadastrar Dicente
-    {% elif  disciplinas%}
-    Cadastrar Disciplina
+        Cadastrar Dicente
+    {% elif  disciplina %}
+        Cadastrar Disciplina
     {% elif dicente %}
-    Cadastrar Aluno
+        Cadastrar Aluno
+    {% elif turma %}
+        Cadastrar Turma
     {% endif %}
 {% endblock %}
 
@@ -34,8 +38,10 @@
             {% bootstrap_form docente %}
         {% elif dicente %}
             {% bootstrap_form dicente %}
-        {% elif disciplinas %}
-            {% bootstrap_form disciplinas %}
+        {% elif disciplina %}
+            {% bootstrap_form disciplina %}
+        {% elif turma %}
+            {% bootstrap_form turma %}
         {% endif %}
 
         <div style="padding: 10px;">

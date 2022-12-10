@@ -9,6 +9,8 @@
         Dicentes
     {% elif  disciplina %}
         Disciplinas
+    {% elif  turma %}
+        Turmas
 {% endif %}
 {% endblock %}
 
@@ -19,6 +21,8 @@
         Dicentes
     {% elif  disciplina %}
         Disciplinas
+    {% elif  turma %}
+        Turmas
     {% endif %}
 {% endblock %}
 
@@ -31,11 +35,18 @@
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
-                        {% if disciplina %}
+                        {% if turma %}
+                            <tr>
+                                <th>Código da Turma</th>
+                                <th>Disciplinas</th>]
+                                <th>Operação</th>
+                            </tr>
+                        {% elif disciplina %}
                             <tr>
                                 <th>Código da Disciplina</th>
                                 <th>Nome da Disciplina</th>
                                 <th>Professor</th>
+                                <th>Operação</th>
                             </tr>
                         {% else %}
                             <tr>
@@ -44,7 +55,7 @@
                                 <th>CPF</th>
                                 <th>Telefone</th>
                                 <th>E-mail</th>
-                                <th>Salario</th>
+                                <th>Operação</th>
                             </tr>
                         {% endif %}
                     </thead>
@@ -55,7 +66,6 @@
                             <th>CPF</th>
                             <th>Telefone</th>
                             <th>E-mail</th>
-                            <th>Salario</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -67,7 +77,10 @@
                                 <td>{{professor.cpf}}</td>
                                 <td>{{professor.telefone}}</td>
                                 <td>{{professor.email}}</td>
-                                <td>${{professor.nome}}</td>
+                                <td>
+                                    <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
+                                    <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                </td>
                             </tr>
                             {% endfor %}
                         {% elif dicente %}
@@ -78,7 +91,10 @@
                                     <td>{{aluno.cpf}}</td>
                                     <td>{{aluno.telefone}}</td>
                                     <td>{{aluno.email}}</td>
-                                    <td>${{aluno.nome}}</td>
+                                    <td>
+                                        <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
+                                        <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% elif disciplina %}
@@ -87,6 +103,17 @@
                                     <td>{{disciplina.disciplina_id}}</td>
                                     <td>{{disciplina.nome_disciplina}}</td>
                                     <td>{{disciplina.professor}}</td>
+                                    <td>
+                                        <span style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></span>
+                                        <span style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></span>  
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% elif turma %}
+                            {% for turma in turma %}
+                                <tr>
+                                    <td>{{turma.turma_id}}</td>
+                                    <td>{{turma.disciplina_id}}</td>
                                 </tr>
                             {% endfor %}
                         {% endif %}
