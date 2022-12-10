@@ -16,27 +16,49 @@ def login(request):
 
 def registrardocente(request):
     if request.method == "POST":
-        form = ProfessorModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        docente = ProfessorModelForm(request.POST, request.FILES)
+        if docente.is_valid():
+            docente.save()
             messages.add_message(request, messages.SUCCESS,'Professor cadastrado com sucesso!')
             return render(request, 'index.html')
     else:
-        form = ProfessorModelForm()
-        return render(request, 'register.html', {'form': form})
+        docente = ProfessorModelForm()
+        return render(request, 'register.html', {'docente': docente})
 
 
 def registrardicente(request):
     if request.method == "POST":
-        form = AlunoModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        dicente = AlunoModelForm(request.POST, request.FILES)
+        if dicente.is_valid():
+            dicente.save()
             messages.add_message(request, messages.SUCCESS,'Aluno cadastrado com sucesso!')
             return render(request, 'index.html')
     else:
-        form = AlunoModelForm()
-        return render(request, 'register.html', {'form': form})
+        dicente = AlunoModelForm()
+        return render(request, 'register.html', {'dicente': dicente})
 
+def registrardisciplina(request):
+    if request.method == "POST":
+        disciplinas = DisciplinaModelForm(request.POST, request.FILES)
+        if disciplinas.is_valid():
+            disciplinas.save()
+            messages.add_message(request, messages.SUCCESS,'Disciplina cadastrada com sucesso!')
+            return render(request, 'index.html')
+    else:
+        disciplinas = DisciplinaModelForm()
+        return render(request, 'register.html', {'disciplinas': disciplinas})
+
+def docentes(request):
+    docente = Professor.objects.all()
+    return render(request, 'mostrar_todos.html', {'docente': docente})
+
+def dicentes(request):
+    dicente = Aluno.objects.all()
+    return render(request, 'mostrar_todos.html', {'dicente': dicente})
+
+def disciplinas(request):
+    disciplina = Disciplina.objects.all()
+    return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
 
 def resetsenha(request):
     return render(request, 'password.html')

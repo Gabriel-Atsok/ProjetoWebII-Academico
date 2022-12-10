@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block h1 %}
+    {% if docente %}
+        Docentes
+    {% elif dicente %}
+        Dicentes
+    {% elif  disciplina %}
+        Disciplinas
+{% endif %}
+{% endblock %}
+
+{% block li %}
+    {% if docente %}
+        Docentes
+    {% elif dicente %}
+        Dicentes
+    {% elif  disciplina %}
+        Disciplinas
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Tabela
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        {% if disciplina %}
+                            <tr>
+                                <th>Código da Disciplina</th>
+                                <th>Nome da Disciplina</th>
+                                <th>Professor</th>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th>Matricula</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Salario</th>
+                            </tr>
+                        {% endif %}
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Salario</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% if docente %}
+                            {% for professor in docente %}
+                            <tr>
+                                <td>{{professor.matricula}}</td>
+                                <td>{{professor.nome}}</td>
+                                <td>{{professor.cpf}}</td>
+                                <td>{{professor.telefone}}</td>
+                                <td>{{professor.email}}</td>
+                                <td>${{professor.nome}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% elif dicente %}
+                            {% for aluno in dicente %}
+                                <tr>
+                                    <td>{{aluno.matricula}}</td>
+                                    <td>{{aluno.nome}}</td>
+                                    <td>{{aluno.cpf}}</td>
+                                    <td>{{aluno.telefone}}</td>
+                                    <td>{{aluno.email}}</td>
+                                    <td>${{aluno.nome}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% elif disciplina %}
+                            {% for disciplina in disciplina %}
+                                <tr>
+                                    <td>{{disciplina.disciplina_id}}</td>
+                                    <td>{{disciplina.nome_disciplina}}</td>
+                                    <td>{{disciplina.professor}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+ {% endblock %}

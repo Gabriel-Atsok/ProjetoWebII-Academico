@@ -1,21 +1,48 @@
 {% extends 'index.html'%}
 {% load static %}
 {% load bootstrap4 %}
+
 {% block h1 %}
-    {% if ProfessorModelForm %}
+    {% if docente %}
         Cadastrar Docente
-    {% else %}
+    {% elif dicente %}
+        Cadastrar Dicente
+    {% elif  disciplinas%}
+        Cadastrar Disciplina
+    {% elif dicente %}
         Cadastrar Aluno
+{% endif %}
+{% endblock %}
+
+{% block li %}
+    {% if docente %}
+    Cadastrar Docente
+    {% elif dicente %}
+    Cadastrar Dicente
+    {% elif  disciplinas%}
+    Cadastrar Disciplina
+    {% elif dicente %}
+    Cadastrar Aluno
     {% endif %}
 {% endblock %}
 
 {% block content %}
-<form method="post" class="form" enctype="multipart/form-data" autocomplete="off">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <div style="padding: 10px;">
-        <input type="submit" class="btn btn-success" value="Salvar" />
-        <input type="button" class="btn btn-secondary" value="Voltar">
-    </div>
-    <form>
+    <form method="post" class="form" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+
+        {% if docente %}
+            {% bootstrap_form docente %}
+        {% elif dicente %}
+            {% bootstrap_form dicente %}
+        {% elif disciplinas %}
+            {% bootstrap_form disciplinas %}
+        {% endif %}
+
+        <div style="padding: 10px;">
+            <input type="submit" class="btn btn-success" value="Salvar" />
+            <input type="button" class="btn btn-secondary" value="Voltar">
+        </div>
+    </form>
+</div>
  {% endblock %}
+ 

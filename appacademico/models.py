@@ -21,11 +21,12 @@ class Aluno(Usuario):
     pass
 
 class Disciplina(models.Model):
-    disciplina_id = models.AutoField(primary_key=True)
-    matricula = models.ForeignKey(Professor, on_delete=models.PROTECT)
+    disciplina_id = models.CharField(primary_key=True, max_length=150)
+    nome_disciplina = models.CharField(max_length=150, blank=True) 
+    professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.disciplina_id
+        return self.nome_disciplina
     
 
 class Turma(models.Model):
