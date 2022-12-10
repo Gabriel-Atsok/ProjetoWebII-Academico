@@ -33,7 +33,7 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="{% url 'registrar' %}">Register</a></li>
+                        <li><a class="dropdown-item" href="{% url 'registrardocente' %}">Register</a></li>
                         <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
                         <!-- O logout deve desaparecer quando alguem estiver logado -->
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
@@ -47,7 +47,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="{% url 'index' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -59,18 +59,18 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'registrar' %}"> Cadastrar Docente</a>
+                                    <a class="nav-link" href="{% url 'registrardocente' %}"> Cadastrar Docente</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Excluir Docente</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Docente
+                                Dicente
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'registrar' %}">Cadastrar Dicente</a>
+                                    <a class="nav-link" href="{% url 'registrardicente' %}">Cadastrar Dicente</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Excluir Dicente</a>
                                 </nav>
                             </div>
@@ -89,7 +89,7 @@
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="{% url 'login' %}">Login</a>
-                                            <a class="nav-link" href="{% url 'registrar' %}">Register</a>
+                                            <a class="nav-link" href="{% url 'registrardocente' %}">Register</a>
                                             <a class="nav-link" href="{% url 'resetsenha' %}">Forgot Password</a>
                                         </nav>
                                     </div>
@@ -127,10 +127,11 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
+                        <h1 class="mt-4">{% block h1 %}TESTE{% endblock %}</h1>
+                        <div class="row">
+                                {% block content %}  
+                                {% endblock %}
+                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
