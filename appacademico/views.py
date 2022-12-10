@@ -1,13 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-def index(resquest):
-    return render(resquest, 'index.html')
+from .models import Secretario, Professor, Aluno, Disciplina, Turma
+from .forms import SecretarioModelForm, ProfessorModelForm, AlunoModelForm, DisciplinaModelForm, TurmaModelForm
 
-def login(resquest):
-    return render(resquest, 'login.html')
+def index(request):
+    return render(request, 'index.html')
 
-def registrar(resquest):
-    return render(resquest, 'register.html')
+def login(request):
+    return render(request, 'login.html')
 
-def resetsenha(resquest):
-    return render(resquest, 'password.html')
+def registrardocente(request):
+    if request.method == "POST":
+        form = ProfessorModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Produto salvo com sucesso!')
+            return redirect('index.html')
+    else:
+        form = ProfessorModelForm()
+        return render(request, 'register.html', {'form': form})
+
+def resetsenha(request):
+    return render(request, 'password.html')
