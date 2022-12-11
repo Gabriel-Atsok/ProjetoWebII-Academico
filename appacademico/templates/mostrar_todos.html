@@ -5,8 +5,8 @@
 {% block h1 %}
     {% if docente %}
         Docentes
-    {% elif dicente %}
-        Dicentes
+    {% elif discente %}
+        discentes
     {% elif  disciplina %}
         Disciplinas
     {% elif  turma %}
@@ -17,8 +17,8 @@
 {% block li %}
     {% if docente %}
         Docentes
-    {% elif dicente %}
-        Dicentes
+    {% elif discente %}
+        discentes
     {% elif  disciplina %}
         Disciplinas
     {% elif  turma %}
@@ -83,8 +83,8 @@
                                 </td>
                             </tr>
                             {% endfor %}
-                        {% elif dicente %}
-                            {% for aluno in dicente %}
+                        {% elif discente %}
+                            {% for aluno in discente %}
                                 <tr>
                                     <td>{{aluno.matricula}}</td>
                                     <td>{{aluno.nome}}</td>

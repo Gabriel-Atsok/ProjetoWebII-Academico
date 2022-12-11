@@ -26,16 +26,16 @@ def registrardocente(request):
         return render(request, 'register.html', {'docente': docente})
 
 
-def registrardicente(request):
+def registrardiscente(request):
     if request.method == "POST":
-        dicente = AlunoModelForm(request.POST, request.FILES)
-        if dicente.is_valid():
-            dicente.save()
+        discente = AlunoModelForm(request.POST, request.FILES)
+        if discente.is_valid():
+            discente.save()
             messages.add_message(request, messages.SUCCESS,'Aluno cadastrado com sucesso!')
             return render(request, 'index.html')
     else:
-        dicente = AlunoModelForm()
-        return render(request, 'register.html', {'dicente': dicente})
+        discente = AlunoModelForm()
+        return render(request, 'register.html', {'discente': discente})
 
 def registrardisciplina(request):
     if request.method == "POST":
@@ -63,9 +63,9 @@ def docentes(request):
     docente = Professor.objects.all()
     return render(request, 'mostrar_todos.html', {'docente': docente})
 
-def dicentes(request):
-    dicente = Aluno.objects.all()
-    return render(request, 'mostrar_todos.html', {'dicente': dicente})
+def discentes(request):
+    discente = Aluno.objects.all()
+    return render(request, 'mostrar_todos.html', {'discente': discente})
 
 def disciplinas(request):
     disciplina = Disciplina.objects.all()
@@ -76,14 +76,13 @@ def turmas(request):
     return render(request, 'mostrar_todos.html', {'turma': turma})
 
 def editar_disciplina(request, disciplina_id):
+    disciplinaobject = Disciplina.objects.get(disciplina_id=disciplina_id)
     disciplinaobject = get_object_or_404(Disciplina, disciplina_id=disciplina_id)
-    print("ATE AQU FOI---------------------------------------------------------------------------------------------------------------------------------------")
     disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None, instance=disciplinaobject)
     if disciplina.is_valid():
-        disciplinaobject.save()
-        messages.success(request, f'{disciplinaobject.nome_disciplina.upper()} editada com sucesso!')
+        messages.success(request, f'{disciplinaobject.nome_disciplina.upper()} editado(a) com sucesso!')
         return redirect('disciplinas')
-#AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+
     return render(request,'editar_todos.html', {'disciplinaobject': disciplinaobject, 'disciplina': disciplina})
 
 def resetsenha(request):

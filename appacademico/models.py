@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Usuario(models.Model):
     matricula=models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=150)  
@@ -22,7 +21,7 @@ class Aluno(Usuario):
 
 class Disciplina(models.Model):
     disciplina_id = models.CharField(primary_key=True, max_length=150)
-    nome_disciplina = models.CharField(max_length=150, blank=True) 
+    nome_disciplina = models.CharField(max_length=150, blank=True)
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
     def __str__(self):

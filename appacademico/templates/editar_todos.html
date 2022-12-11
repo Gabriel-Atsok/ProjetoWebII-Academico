@@ -5,8 +5,8 @@
 {% block h1 %}
     {% if docente %}
         Editar Docente {{docente.nome}}
-    {% elif dicente %}
-        Editar Dicente {{dicente.nome}}
+    {% elif discente %}
+        Editar discente {{discente.nome}}
     {% elif  disciplina %}
         Editar Disciplina {{disciplina.nome}}
     {% elif turma %}
@@ -17,11 +17,11 @@
 {% block li %}
     {% if docente %}
         Cadastrar Docente
-    {% elif dicente %}
-        Cadastrar Dicente
+    {% elif discente %}
+        Cadastrar discente
     {% elif  disciplina %}
         Cadastrar Disciplina
-    {% elif dicente %}
+    {% elif discente %}
         Cadastrar Aluno
     {% elif turma %}
         Cadastrar Turma
@@ -29,13 +29,13 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="form" enctype="multipart/form-data" autocomplete="off">
+    <form method="POST" class="form" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
 
         {% if docente %}
             {% bootstrap_form docente %}
-        {% elif dicente %}
-            {% bootstrap_form dicente %}
+        {% elif discente %}
+            {% bootstrap_form discente %}
         {% elif disciplina %}
             {% bootstrap_form disciplina %}
         {% elif turma %}
