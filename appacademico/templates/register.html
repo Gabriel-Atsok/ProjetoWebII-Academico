@@ -11,7 +11,7 @@
         Cadastrar Disciplina
     {% elif discente %}
         Cadastrar Aluno
-    {% elif turma %}
+    {% elif turmas %}
         Cadastrar Turma
     {% endif %}
 {% endblock %}
@@ -25,7 +25,7 @@
         Cadastrar Disciplina
     {% elif discente %}
         Cadastrar Aluno
-    {% elif turma %}
+    {% elif turmas %}
         Cadastrar Turma
     {% endif %}
 {% endblock %}
@@ -33,6 +33,7 @@
 {% block content %}
     <form method="post" class="form" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
+        {% bootstrap_messages %}
 
         {% if docente %}
             {% bootstrap_form docente %}
@@ -40,8 +41,8 @@
             {% bootstrap_form discente %}
         {% elif disciplina %}
             {% bootstrap_form disciplina %}
-        {% elif turma %}
-            {% bootstrap_form turma %}
+        {% elif turmas %}
+            {% bootstrap_form turmas %}
         {% endif %}
 
         <div style="padding: 10px;">

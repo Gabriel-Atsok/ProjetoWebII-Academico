@@ -54,7 +54,10 @@ def registrarturma(request):
         if turma.is_valid():
             turma.save()
             messages.add_message(request, messages.SUCCESS,'Disciplina cadastrada com sucesso!')
-            return render(request, 'index.html')
+            return redirect('turmas')
+        else:
+            turma = TurmaModelForm()
+            return render(request, 'register.html', {'turmas': turma})
     else:
         turma = TurmaModelForm()
         return render(request, 'register.html', {'turmas': turma})
@@ -126,6 +129,12 @@ def editar_turma(request, turma_id):
         else:
             return render(request,'editar_todos.html', {'turmas': turma})
     return render(request,'editar_todos.html', {'turmas': turma})
+
+def del_aluno(request, matricula):
+    discente = Aluno.objects.get(matricula=matricula)
+        discente.delete()
+        messages.success(request, f'{discente.nome.upper()} excluído(a) com sucesso!')
+    return redirect('discentes')
 
 def resetsenha(request):
     return render(request, 'password.html')

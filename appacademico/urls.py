@@ -16,5 +16,6 @@ urlpatterns = [
     path('editar_disciplina/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
     path('editar_turma/<str:turma_id>', views.editar_turma, name='editar_turma'),
     path('resetsenha', views.resetsenha, name='resetsenha'),
+    path('del_aluno/<int:matricula>', views.del_aluno, name='del_aluno'),
     path('login', views.login, name='login'),
 ]
