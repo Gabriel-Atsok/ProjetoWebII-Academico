@@ -116,16 +116,16 @@ def editar_docente(request, matricula):
 
 def editar_turma(request, turma_id):
     turmaobject = get_object_or_404(Turma, pk=turma_id)
-    tuma = TurmaModelForm(instance=turmaobject)
+    turma = TurmaModelForm(instance=turmaobject)
     if (request.method == "POST"):
-        tuma = TurmaModelForm(request.POST, instance=turmaobject)
-        if (tuma.is_valid()):
-            tuma.save()
+        turma = TurmaModelForm(request.POST, instance=turmaobject)
+        if (turma.is_valid()):
+            turma.save()
             messages.success(request, f'{turmaobject.turma_id} editado(a) com sucesso!')
-            return redirect('tumas')
+            return redirect('turmas')
         else:
-            return render(request,'editar_todos.html', {'tuma': tuma})
-    return render(request,'editar_todos.html', {'tuma': tuma})
+            return render(request,'editar_todos.html', {'turma': turma})
+    return render(request,'editar_todos.html', {'turma': turma})
 
 def resetsenha(request):
     return render(request, 'password.html')
