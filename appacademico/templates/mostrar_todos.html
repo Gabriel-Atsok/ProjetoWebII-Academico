@@ -9,7 +9,7 @@
         discentes
     {% elif  disciplina %}
         Disciplinas
-    {% elif  turma %}
+    {% elif  turmas %}
         Turmas
 {% endif %}
 {% endblock %}
@@ -21,7 +21,7 @@
         discentes
     {% elif  disciplina %}
         Disciplinas
-    {% elif  turma %}
+    {% elif  turmas %}
         Turmas
     {% endif %}
 {% endblock %}
@@ -35,7 +35,7 @@
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
-                        {% if turma %}
+                        {% if turmas %}
                             <tr>
                                 <th>Código da Turma</th>
                                 <th>Disciplinas</th>]
@@ -109,8 +109,8 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-                        {% elif turma %}
-                            {% for turma in turma %}
+                        {% elif turmas %}
+                            {% for turma in turmas %}
                                 <tr>
                                     <td>{{turma.turma_id}}</td>
                                     <td>{{turma.disciplina_id}}</td>

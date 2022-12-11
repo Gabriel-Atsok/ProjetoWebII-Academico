@@ -57,7 +57,7 @@ def registrarturma(request):
             return render(request, 'index.html')
     else:
         turma = TurmaModelForm()
-        return render(request, 'register.html', {'turma': turma})
+        return render(request, 'register.html', {'turmas': turma})
 
 def docentes(request):
     docente = Professor.objects.all()
@@ -73,7 +73,7 @@ def disciplinas(request):
 
 def turmas(request):
     turma = Turma.objects.all()
-    return render(request, 'mostrar_todos.html', {'turma': turma})
+    return render(request, 'mostrar_todos.html', {'turmas': turma})
 
 def editar_disciplina(request, disciplina_id):
     disciplinaobject = get_object_or_404(Disciplina, pk=disciplina_id)
@@ -124,8 +124,8 @@ def editar_turma(request, turma_id):
             messages.success(request, f'{turmaobject.turma_id} editado(a) com sucesso!')
             return redirect('turmas')
         else:
-            return render(request,'editar_todos.html', {'turma': turma})
-    return render(request,'editar_todos.html', {'turma': turma})
+            return render(request,'editar_todos.html', {'turmas': turma})
+    return render(request,'editar_todos.html', {'turmas': turma})
 
 def resetsenha(request):
     return render(request, 'password.html')

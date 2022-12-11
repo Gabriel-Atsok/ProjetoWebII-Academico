@@ -9,7 +9,7 @@
         Editar discente {{discente.nome}}
     {% elif  disciplina %}
         Editar Disciplina {{disciplina.nome}}
-    {% elif turma %}
+    {% elif turmas %}
         Editar Turma {{turma.turma_id}}
     {% endif %}
 {% endblock %}
@@ -23,7 +23,7 @@
         Cadastrar Disciplina
     {% elif discente %}
         Cadastrar Aluno
-    {% elif turma %}
+    {% elif turmas %}
         Cadastrar Turma
     {% endif %}
 {% endblock %}
@@ -38,8 +38,8 @@
             {% bootstrap_form discente %}
         {% elif disciplina %}
             {% bootstrap_form disciplina %}
-        {% elif turma %}
-            {% bootstrap_form turma %}
+        {% elif turmas %}
+            {% bootstrap_form turmas %}
         {% endif %}
 
         <div style="padding: 10px;">
