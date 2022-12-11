@@ -11,10 +11,10 @@ urlpatterns = [
     path('discentes', views.discentes, name='discentes'),
     path('disciplinas', views.disciplinas, name='disciplinas'),
     path('turmas', views.turmas, name='turmas'),
-    #path('editar_docente/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
-    #path('editar_discente/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
+    path('editar_docente/<int:matricula>', views.editar_docente, name='editar_docente'),
+    path('editar_discente/<int:matricula>', views.editar_discente, name='editar_discente'),
     path('editar_disciplina/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
-    #path('editar_turma/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
+    path('editar_turma/<int:turma_id>', views.editar_turma, name='editar_turma'),
     path('resetsenha', views.resetsenha, name='resetsenha'),
     path('login', views.login, name='login'),
 ]

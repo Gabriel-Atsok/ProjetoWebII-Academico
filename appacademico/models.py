@@ -1,7 +1,7 @@
 from django.db import models
 
 class Usuario(models.Model):
-    matricula=models.IntegerField(primary_key=True)
+    matricula=models.AutoField(primary_key=True)
     nome = models.CharField(max_length=150)  
     cpf=models.CharField(max_length=15)
     telefone=models.IntegerField()
@@ -20,7 +20,7 @@ class Aluno(Usuario):
     pass
 
 class Disciplina(models.Model):
-    disciplina_id = models.CharField(primary_key=True, max_length=150)
+    disciplina_id = models.AutoField(primary_key=True)
     nome_disciplina = models.CharField(max_length=150, blank=True)
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
@@ -29,8 +29,5 @@ class Disciplina(models.Model):
     
 
 class Turma(models.Model):
-    turma_id = models.CharField(primary_key=True, max_length=150)
+    turma_id = models.AutoField(primary_key=True)
     disciplina_id = models.ForeignKey(Disciplina, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.turma_id

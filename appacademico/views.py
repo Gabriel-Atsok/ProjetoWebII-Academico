@@ -76,14 +76,56 @@ def turmas(request):
     return render(request, 'mostrar_todos.html', {'turma': turma})
 
 def editar_disciplina(request, disciplina_id):
-    disciplinaobject = Disciplina.objects.get(disciplina_id=disciplina_id)
-    disciplinaobject = get_object_or_404(Disciplina, disciplina_id=disciplina_id)
-    disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None, instance=disciplinaobject)
-    if disciplina.is_valid():
-        messages.success(request, f'{disciplinaobject.nome_disciplina.upper()} editado(a) com sucesso!')
-        return redirect('disciplinas')
+    disciplinaobject = get_object_or_404(Disciplina, pk=disciplina_id)
+    disciplina = DisciplinaModelForm(instance=disciplinaobject)
+    if (request.method == "POST"):
+        disciplina = DisciplinaModelForm(request.POST, instance=disciplinaobject)
+        if (disciplina.is_valid()):
+            disciplina.save()
+            messages.success(request, f'{disciplinaobject.nome_disciplina.upper()} editado(a) com sucesso!')
+            return redirect('disciplinas')
+        else:
+            return render(request,'editar_todos.html', {'disciplina': disciplina})
+    return render(request,'editar_todos.html', {'disciplina': disciplina})
 
-    return render(request,'editar_todos.html', {'disciplinaobject': disciplinaobject, 'disciplina': disciplina})
+def editar_discente(request, matricula):
+    discentenaobject = get_object_or_404(Aluno, pk=matricula)
+    discente = AlunoModelForm(instance=discentenaobject)
+    if (request.method == "POST"):
+        discente = AlunoModelForm(request.POST, instance=discentenaobject)
+        if (discente.is_valid()):
+            discente.save()
+            messages.success(request, f'{discentenaobject.nome.upper()} editado(a) com sucesso!')
+            return redirect('discentes')
+        else:
+            return render(request,'editar_todos.html', {'discente': discente})
+    return render(request,'editar_todos.html', {'discente': discente})
+
+def editar_docente(request, matricula):
+    docentenaobject = get_object_or_404(Professor, pk=matricula)
+    docente = ProfessorModelForm(instance=docentenaobject)
+    if (request.method == "POST"):
+        docente = ProfessorModelForm(request.POST, instance=docentenaobject)
+        if (docente.is_valid()):
+            docente.save()
+            messages.success(request, f'{docentenaobject.nome.upper()} editado(a) com sucesso!')
+            return redirect('docentes')
+        else:
+            return render(request,'editar_todos.html', {'docente': docente})
+    return render(request,'editar_todos.html', {'docente': docente})
+
+def editar_turma(request, turma_id):
+    turmaobject = get_object_or_404(Turma, pk=turma_id)
+    tuma = TurmaModelForm(instance=turmaobject)
+    if (request.method == "POST"):
+        tuma = TurmaModelForm(request.POST, instance=turmaobject)
+        if (tuma.is_valid()):
+            tuma.save()
+            messages.success(request, f'{turmaobject.turma_id} editado(a) com sucesso!')
+            return redirect('tumas')
+        else:
+            return render(request,'editar_todos.html', {'tuma': tuma})
+    return render(request,'editar_todos.html', {'tuma': tuma})
 
 def resetsenha(request):
     return render(request, 'password.html')
