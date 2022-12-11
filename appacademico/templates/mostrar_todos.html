@@ -47,6 +47,7 @@
                                 <th>Código da Disciplina</th>
                                 <th>Nome da Disciplina</th>
                                 <th>Professor</th>
+                                <th>Turma</th>
                                 <th>Operação</th>
                             </tr>
                         {% else %}
@@ -104,6 +105,7 @@
                                     <td>{{disciplina.disciplina_id}}</td>
                                     <td>{{disciplina.nome_disciplina}}</td>
                                     <td>{{disciplina.professor}}</td>
+                                    <td>{{disciplina.turma_id.nome_turma}}</td>
                                     <td>
                                         <a href="{% url 'editar_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
                                         <a href="{% url 'del_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
@@ -114,7 +116,7 @@
                             {% for turma in turmas %}
                                 <tr>
                                     <td>{{turma.turma_id}}</td>
-                                    <td>{{turma.disciplina_id}}</td>
+                                    <td>{{turma.nome_turma}}</td>
                                     <td>
                                         <a href="{% url 'editar_turma' turma.turma_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
                                         <a href="{% url 'del_turma' turma.turma_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  

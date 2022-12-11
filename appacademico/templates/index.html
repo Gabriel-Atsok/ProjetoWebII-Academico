@@ -67,7 +67,7 @@
                             </a>
                             <div class="collapse" id="collapseLayoutsdiscente" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'registrardiscente' %}">Cadastrar discente</a>
+                                    <a class="nav-link" href="{% url 'registrardiscente' %}">Cadastrar Discente</a>
                                     <a class="nav-link" href="{% url 'discentes' %}">Discentes</a>
                                 </nav>
                             </div>
@@ -82,17 +82,6 @@
                                     <a class="nav-link" href="{% url 'docentes' %}">Docentes</a>
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsdisciplina" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Disciplinas
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayoutsdisciplina" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'registrardisciplina' %}">Cadastrar Diciplina</a>
-                                    <a class="nav-link" href="{% url 'disciplinas' %}">Disciplinas</a>
-                                </nav>
-                            </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsturma" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Turmas
@@ -102,6 +91,17 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'registrarturma' %}">Cadastrar Turma</a>
                                     <a class="nav-link" href="{% url 'turmas' %}">Turmas</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsdisciplina" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Disciplinas
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsdisciplina" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'registrardisciplina' %}">Cadastrar Diciplina</a>
+                                    <a class="nav-link" href="{% url 'disciplinas' %}">Disciplinas</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>

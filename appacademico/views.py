@@ -11,7 +11,21 @@ def index(request):
 
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method == "POST":
+        usuario = request.POST.get('usuario')
+        senha = request.POST.get('senha')
+        user = auth.authenticate(request, username=usuario, password=senha)
+
+        if not user:
+            messages.error(request, "Usuário ou senha inválidos!")
+            return render(request, 'contas/login.html')
+        else:
+            auth.login(request, user)
+            messages.success(request, "Login realizado com sucesso!")
+            return redirect('login')
+
+    return render(request, 'contas/login.html')
+    
 
 
 def registrardocente(request):
