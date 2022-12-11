@@ -16,6 +16,9 @@ urlpatterns = [
     path('editar_disciplina/<int:disciplina_id>', views.editar_disciplina, name='editar_disciplina'),
     path('editar_turma/<str:turma_id>', views.editar_turma, name='editar_turma'),
     path('resetsenha', views.resetsenha, name='resetsenha'),
-    path('del_aluno/<int:matricula>', views.del_aluno, name='del_aluno'),
+    path('del_discente/<int:matricula>', views.del_discente, name='del_discente'),
+    path('del_docente/<int:matricula>', views.del_docente, name='del_docente'),
+    path('del_disciplina/<int:disciplina_id>', views.del_disciplina, name='del_disciplina'),
+    path('del_turma/<str:turma_id>', views.del_turma, name='del_turma'),
     path('login', views.login, name='login'),
 ]

@@ -18,16 +18,19 @@ class Professor(Usuario):
     pass
 class Aluno(Usuario):
     pass
+class Turma(models.Model):
+    turma_id = models.AutoField(primary_key=True)
+    nome_turma = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.nome_turma
 
 class Disciplina(models.Model):
     disciplina_id = models.AutoField(primary_key=True)
     nome_disciplina = models.CharField(max_length=150, blank=True)
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
+    turma_id = models.ForeignKey(Turma, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nome_disciplina
     
-
-class Turma(models.Model):
-    turma_id = models.CharField(primary_key=True, max_length=150)
-    disciplina_id = models.ForeignKey(Disciplina, on_delete=models.PROTECT)

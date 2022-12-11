@@ -130,11 +130,29 @@ def editar_turma(request, turma_id):
             return render(request,'editar_todos.html', {'turmas': turma})
     return render(request,'editar_todos.html', {'turmas': turma})
 
-def del_aluno(request, matricula):
+def del_discente(request, matricula):
     discente = Aluno.objects.get(matricula=matricula)
-        discente.delete()
-        messages.success(request, f'{discente.nome.upper()} excluído(a) com sucesso!')
+    discente.delete()
+    messages.success(request, f'{discente.nome.upper()} excluído(a) com sucesso!')
     return redirect('discentes')
+
+def del_docente(request, matricula):
+    docente = Professor.objects.get(matricula=matricula)
+    docente.delete()
+    messages.success(request, f'{docente.nome.upper()} excluído(a) com sucesso!')
+    return redirect('docentes')
+
+def del_disciplina(request, disciplina_id):
+    disciplina = Disciplina.objects.get(disciplina_id=disciplina_id)
+    disciplina.delete()
+    messages.success(request, f'{disciplina.nome_disciplina.upper()} excluído(a) com sucesso!')
+    return redirect('disciplinas')
+
+def del_turma(request, turma_id):
+    turma = Turma.objects.get(turma_id=turma_id)
+    turma.delete()
+    messages.success(request, f'{turma.turma_id} excluído(a) com sucesso!')
+    return redirect('turmas')
 
 def resetsenha(request):
     return render(request, 'password.html')

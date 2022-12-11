@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block titleh %}Login{% endblock titleh %}
+
+{% block titulo %}
+
+{% if request.user.is_authenticated %}
+    <p>Bem-vindo, {{request.user}}!</p><br> 
+{% else %}
+    Login
+{% endif %}
+{% endblock titulo %}
+
+{% block conteudo %}
+
+{% if request.user.is_authenticated %}
+
+<h3><a href="{% url 'edit_cadastro' %}">&lt;Clique aqui&gt;</a> para editar sua senha.</h3>
+<p style="margin-top: 50px;">
+<a href="{% url 'produtos_ocultos' %}"><button class="btn btn-outline-danger"><b>Ver produtos ocultos.</b></button></a>
+</p>
+
+{% else %}
+
+    <form method='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="usuario">Usuário</label>
+        <input type="text" name='usuario' class="form-control" id="usuario" autocomplete="off">
+        </div>
+        <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" name='senha' class="form-control" id="senha">
+        <a href={% url 'cadastro' %}><small>Cadastrar-me.</small></a>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+
+{% endif %}
+
+{% endblock conteudo %}

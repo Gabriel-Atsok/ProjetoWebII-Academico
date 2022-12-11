@@ -6,7 +6,7 @@
     {% if docente %}
         Docentes
     {% elif discente %}
-        discentes
+        Discentes
     {% elif  disciplina %}
         Disciplinas
     {% elif  turmas %}
@@ -18,7 +18,7 @@
     {% if docente %}
         Docentes
     {% elif discente %}
-        discentes
+        Discentes
     {% elif  disciplina %}
         Disciplinas
     {% elif  turmas %}
@@ -39,7 +39,7 @@
                         {% if turmas %}
                             <tr>
                                 <th>Código da Turma</th>
-                                <th>Disciplinas</th>]
+                                <th>Disciplinas</th>
                                 <th>Operação</th>
                             </tr>
                         {% elif disciplina %}
@@ -80,7 +80,7 @@
                                 <td>{{professor.email}}</td>
                                 <td>
                                     <a href="{% url 'editar_docente' professor.matricula %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
+                                    <a href="{% url 'del_docente' professor.matricula %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                 </td>
                             </tr>
                             {% endfor %}
@@ -94,7 +94,7 @@
                                     <td>{{aluno.email}}</td>
                                     <td>
                                         <a href="{% url 'editar_discente' aluno.matricula %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{% url 'del_aluno' aluno.matricula %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
+                                        <a href="{% url 'del_discente' aluno.matricula %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -106,7 +106,7 @@
                                     <td>{{disciplina.professor}}</td>
                                     <td>
                                         <a href="{% url 'editar_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
+                                        <a href="{% url 'del_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -117,7 +117,7 @@
                                     <td>{{turma.disciplina_id}}</td>
                                     <td>
                                         <a href="{% url 'editar_turma' turma.turma_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="#" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
+                                        <a href="{% url 'del_turma' turma.turma_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
                                     </td>
                                 </tr>
                             {% endfor %}
