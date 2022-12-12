@@ -3,131 +3,147 @@
 {% load bootstrap4 %}
 
 {% block h1 %}
-    {% if docente %}
-        Docentes
-    {% elif discente %}
-        Discentes
-    {% elif  disciplina %}
-        Disciplinas
-    {% elif  turmas %}
-        Turmas
+{% if docente %}
+Docentes
+{% elif discente %}
+Discentes
+{% elif disciplina %}
+Disciplinas
+{% elif turmas %}
+Turmas
 {% endif %}
 {% endblock %}
 
 {% block li %}
-    {% if docente %}
-        Docentes
-    {% elif discente %}
-        Discentes
-    {% elif  disciplina %}
-        Disciplinas
-    {% elif  turmas %}
-        Turmas
-    {% endif %}
+{% if docente %}
+Docentes
+{% elif discente %}
+Discentes
+{% elif disciplina %}
+Disciplinas
+{% elif turmas %}
+Turmas
+{% endif %}
 {% endblock %}
 
 {% block content %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Tabela
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        {% bootstrap_messages %}
-                        {% if turmas %}
-                            <tr>
-                                <th>Código da Turma</th>
-                                <th>Disciplinas</th>
-                                <th>Operação</th>
-                            </tr>
-                        {% elif disciplina %}
-                            <tr>
-                                <th>Código da Disciplina</th>
-                                <th>Nome da Disciplina</th>
-                                <th>Professor</th>
-                                <th>Turma</th>
-                                <th>Operação</th>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <th>Matricula</th>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Telefone</th>
-                                <th>E-mail</th>
-                                <th>Operação</th>
-                            </tr>
-                        {% endif %}
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Matricula</th>
-                            <th>Nome</th>
-                            <th>CPF</th>
-                            <th>Telefone</th>
-                            <th>E-mail</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        {% if docente %}
-                            {% for professor in docente %}
-                            <tr>
-                                <td>{{professor.matricula}}</td>
-                                <td>{{professor.nome}}</td>
-                                <td>{{professor.cpf}}</td>
-                                <td>{{professor.telefone}}</td>
-                                <td>{{professor.email}}</td>
-                                <td>
-                                    <a href="{% url 'editar_docente' professor.matricula %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="{% url 'del_docente' professor.matricula %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        {% elif discente %}
-                            {% for aluno in discente %}
-                                <tr>
-                                    <td>{{aluno.matricula}}</td>
-                                    <td>{{aluno.nome}}</td>
-                                    <td>{{aluno.cpf}}</td>
-                                    <td>{{aluno.telefone}}</td>
-                                    <td>{{aluno.email}}</td>
-                                    <td>
-                                        <a href="{% url 'editar_discente' aluno.matricula %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{% url 'del_discente' aluno.matricula %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% elif disciplina %}
-                            {% for disciplina in disciplina %}
-                                <tr>
-                                    <td>{{disciplina.disciplina_id}}</td>
-                                    <td>{{disciplina.nome_disciplina}}</td>
-                                    <td>{{disciplina.professor}}</td>
-                                    <td>{{disciplina.turma_id.nome_turma}}</td>
-                                    <td>
-                                        <a href="{% url 'editar_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{% url 'del_disciplina' disciplina.disciplina_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% elif turmas %}
-                            {% for turma in turmas %}
-                                <tr>
-                                    <td>{{turma.turma_id}}</td>
-                                    <td>{{turma.nome_turma}}</td>
-                                    <td>
-                                        <a href="{% url 'editar_turma' turma.turma_id %}" style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;" ><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a href="{% url 'del_turma' turma.turma_id %}" style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i class="fa-solid fa-trash"></i></a>  
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+{% bootstrap_messages %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Tabela
     </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                {% if turmas %}
+                <tr>
+                    <th>Código da Turma</th>
+                    <th>Disciplinas</th>
+                    <th>Operação</th>
+                </tr>
+                {% elif disciplina %}
+                <tr>
+                    <th>Código da Disciplina</th>
+                    <th>Nome da Disciplina</th>
+                    <th>Professor</th>
+                    <th>Turma</th>
+                    <th>Operação</th>
+                </tr>
+                {% else %}
+                <tr>
+                    <th>Matricula</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Operação</th>
+                </tr>
+                {% endif %}
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Matricula</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% if docente %}
+                {% for professor in docente %}
+                <tr>
+                    <td>{{professor.matricula}}</td>
+                    <td>{{professor.nome}}</td>
+                    <td>{{professor.cpf}}</td>
+                    <td>{{professor.telefone}}</td>
+                    <td>{{professor.email}}</td>
+                    <td>
+                        <a href="{% url 'editar_docente' professor.matricula %}"
+                            style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;"><i
+                                class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="{% url 'del_docente' professor.matricula %}"
+                            style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% elif discente %}
+                {% for aluno in discente %}
+                <tr>
+                    <td>{{aluno.matricula}}</td>
+                    <td>{{aluno.nome}}</td>
+                    <td>{{aluno.cpf}}</td>
+                    <td>{{aluno.telefone}}</td>
+                    <td>{{aluno.email}}</td>
+                    <td>
+                        <a href="{% url 'editar_discente' aluno.matricula %}"
+                            style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;"><i
+                                class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="{% url 'del_discente' aluno.matricula %}"
+                            style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% elif disciplina %}
+                {% for disciplina in disciplina %}
+                <tr>
+                    <td>{{disciplina.disciplina_id}}</td>
+                    <td>{{disciplina.nome_disciplina}}</td>
+                    <td>{{disciplina.professor}}</td>
+                    <td>{{disciplina.turma_id.nome_turma}}</td>
+                    <td>
+                        <a href="{% url 'editar_disciplina' disciplina.disciplina_id %}"
+                            style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;"><i
+                                class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="{% url 'del_disciplina' disciplina.disciplina_id %}"
+                            style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% elif turmas %}
+                {% for turma in turmas %}
+                <tr>
+                    <td>{{turma.turma_id}}</td>
+                    <td>{{turma.nome_turma}}</td>
+                    <td>
+                        <a href="{% url 'editar_turma' turma.turma_id %}"
+                            style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;"><i
+                                class="fa-regular fa-pen-to-square"></i></a>
+                        <a href="{% url 'del_turma' turma.turma_id %}"
+                            style="padding: 10px; color: rgb(255, 0, 0); font-size: 25px;"><i
+                                class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
 </main>
- {% endblock %}
+{% endblock %}

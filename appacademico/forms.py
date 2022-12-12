@@ -17,6 +17,13 @@ class AlunoModelForm(forms.ModelForm):
         model = Aluno
         fields = ['matricula', 'nome', 'cpf', 'telefone', 'email']
 
+    def clean_nome(self):
+        nome = self.cleaned_data['nome']
+        if len(nome) < 2:
+            raise ValueError("Nome no formato errado!")
+        else:
+            return nome
+
 class DisciplinaModelForm(forms.ModelForm):
     class Meta:
         model = Disciplina
