@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.validators import validate_email
 
 from .models import Secretario, Professor, Aluno, Disciplina, Turma
 from .forms import SecretarioModelForm, ProfessorModelForm, AlunoModelForm, DisciplinaModelForm, TurmaModelForm
@@ -11,17 +12,17 @@ def index(request):
 
 
 def login(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         usuario = request.POST.get('usuario')
         senha = request.POST.get('senha')
         user = auth.authenticate(request, username=usuario, password=senha)
 
         if not user:
-            messages.error(request, "Usuário ou senha inválidos!")
+            messages.error(request, 'Usuário ou senha inválidos!')
             return render(request, 'contas/login.html')
         else:
             auth.login(request, user)
-            messages.success(request, "Login realizado com sucesso!")
+            messages.success(request, 'Login realizado com sucesso!')
             return redirect('login')
 
     return render(request, 'contas/login.html')
@@ -30,7 +31,7 @@ def login(request):
 
 def registrardocente(request):
     docente = ProfessorModelForm()
-    if request.method == "POST":
+    if request.method == 'POST':
 
         matricula = request.POST.get('matricula')
         nome = request.POST.get('nome')
@@ -38,19 +39,27 @@ def registrardocente(request):
         telefone = request.POST.get('telefone')
         email = request.POST.get('email')
 
-        if not matricula or not nome or not cpf or not telefone or not email:
+        if not nome or not cpf or not telefone or not email:
             messages.error(request, "Não pode deixar campos em branco!")
             return render(request, 'register.html', {'docente': docente})
         
-        elif matricula:
-            minimal_number = 2 
-            minimal_upper_char = 2
-            minimal_lower_char = 2
-            minimal_special_char = 1
-            minimal_len_char = 10
+        if len(nome) < 4:
+            messages.info(request, "Nome muito curto!")
+            return render(request, 'register.html', {'docente': docente})
 
-            if len(matricula):
-                pass
+        if len(cpf) != 11:
+            messages.info(request, "Formato de CPF errado!")
+            return render(request, 'register.html', {'docente': docente})
+
+        if len(telefone) != 11:
+            messages.info(request, "Formato de número incorreto errado!")
+            return render(request, 'register.html', {'docente': docente})
+
+        try:
+            validate_email(email)
+        except:
+            messages.info(request, "E-mail inválido!")
+            return render(request, 'register.html', {'docente': docente}) 
 
         else:
             try:
@@ -69,8 +78,8 @@ def registrardocente(request):
         return render(request, 'register.html', {'docente': docente})
 
         
-""" def registrardocente(request):
-    if request.method == "POST":
+''' def registrardocente(request):
+    if request.method == 'POST':
         docente = ProfessorModelForm(request.POST or None, request.FILES or None)
         if docente.is_valid():
             docente.save()
@@ -79,10 +88,10 @@ def registrardocente(request):
             return render(request, 'index.html')
     else:
         docente = ProfessorModelForm()
-        return render(request, 'register.html', {'docente': docente}) """
+        return render(request, 'register.html', {'docente': docente}) '''
 
 def registrardiscente(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         discente = AlunoModelForm(request.POST or None, request.FILES or None)
         if discente.is_valid():
             discente.save()
@@ -93,9 +102,57 @@ def registrardiscente(request):
         discente = AlunoModelForm()
         return render(request, 'register.html', {'discente': discente})
 
+def registrardiscente(request):
+    discente = AlunoModelForm()
+    if request.method == 'POST':
+
+        matricula = request.POST.get('matricula')
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+
+        if not nome or not cpf or not telefone or not email:
+            messages.error(request, "Não pode deixar campos em branco!")
+            return render(request, 'register.html', {'discente': discente})
+        
+        if len(nome) < 4:
+            messages.info(request, "Nome muito curto!")
+            return render(request, 'register.html', {'discente': discente})
+
+        if len(cpf) != 11:
+            messages.info(request, "Formato de CPF errado!")
+            return render(request, 'register.html', {'discente': discente})
+
+        if len(telefone) != 11:
+            messages.info(request, "Formato de número incorreto errado!")
+            return render(request, 'register.html', {'discente': discente})
+
+        try:
+            validate_email(email)
+        except:
+            messages.info(request, "E-mail inválido!")
+            return render(request, 'register.html', {'discente': discente}) 
+
+        else:
+            try:
+                discente = Professor(matricula=matricula, nome=nome,
+                                                cpf=cpf, telefone=telefone,
+                                                email=email)
+                discente.save()
+                discente = Aluno.objects.all()
+                messages.add_message(request, messages.SUCCESS,
+                                        'Professor cadastrado com sucesso!')
+                return render(request, 'mostrar_todos.html', {'discente': discente})
+            except:
+                messages.add_message(request, messages.SUCCESS,
+                                        'Erro ao cadastrar!') 
+    else:
+        return render(request, 'register.html', {'discente': discente})
+
 
 def registrardisciplina(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None)
         if disciplina.is_valid():
             disciplina.save()
@@ -108,7 +165,7 @@ def registrardisciplina(request):
 
 
 def registrarturma(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
         if turma.is_valid():
             turma.save()
@@ -146,7 +203,7 @@ def turmas(request):
 def editar_disciplina(request, disciplina_id):
     disciplinaobject = get_object_or_404(Disciplina, pk=disciplina_id)
     disciplina = DisciplinaModelForm(instance=disciplinaobject)
-    if (request.method == "POST"):
+    if (request.method == 'POST'):
         disciplina = DisciplinaModelForm(
             request.POST, instance=disciplinaobject)
         if (disciplina.is_valid()):
@@ -162,7 +219,7 @@ def editar_disciplina(request, disciplina_id):
 def editar_discente(request, matricula):
     discentenaobject = get_object_or_404(Aluno, pk=matricula)
     discente = AlunoModelForm(instance=discentenaobject)
-    if (request.method == "POST"):
+    if (request.method == 'POST'):
         discente = AlunoModelForm(request.POST, instance=discentenaobject)
         if (discente.is_valid()):
             discente.save()
@@ -177,7 +234,7 @@ def editar_discente(request, matricula):
 def editar_docente(request, matricula):
     docentenaobject = get_object_or_404(Professor, pk=matricula)
     docente = ProfessorModelForm(instance=docentenaobject)
-    if (request.method == "POST"):
+    if (request.method == 'POST'):
         docente = ProfessorModelForm(request.POST, instance=docentenaobject)
         if (docente.is_valid()):
             docente.save()
@@ -192,7 +249,7 @@ def editar_docente(request, matricula):
 def editar_turma(request, turma_id):
     turmaobject = get_object_or_404(Turma, pk=turma_id)
     turma = TurmaModelForm(instance=turmaobject)
-    if (request.method == "POST"):
+    if (request.method == 'POST'):
         turma = TurmaModelForm(request.POST, instance=turmaobject)
         if (turma.is_valid()):
             turma.save()
