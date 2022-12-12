@@ -21,6 +21,7 @@ class Aluno(Usuario):
 class Turma(models.Model):
     turma_id = models.AutoField(primary_key=True)
     nome_turma = models.CharField(max_length=150)
+    aluno = models.ForeignKey(Aluno, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nome_turma

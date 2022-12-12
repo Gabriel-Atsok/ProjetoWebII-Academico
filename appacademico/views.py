@@ -29,6 +29,7 @@ def login(request):
 
 
 def registrardocente(request):
+    docente = ProfessorModelForm()
     if request.method == "POST":
 
         matricula = request.POST.get('matricula')
@@ -37,8 +38,21 @@ def registrardocente(request):
         telefone = request.POST.get('telefone')
         email = request.POST.get('email')
 
-        if:
+        if not matricula or not nome or not cpf or not telefone or not email:
+            messages.error(request, "Não pode deixar campos em branco!")
+            return render(request, 'register.html', {'docente': docente})
         
+        elif matricula:
+            minimal_number = 2 
+            minimal_upper_char = 2
+            minimal_lower_char = 2
+            minimal_special_char = 1
+            minimal_len_char = 10
+
+            if len(matricula):
+                pass
+
+        else:
             try:
                 docente = Professor(matricula=matricula, nome=nome,
                                                 cpf=cpf, telefone=telefone,
@@ -52,7 +66,6 @@ def registrardocente(request):
                 messages.add_message(request, messages.SUCCESS,
                                         'Erro ao cadastrar!') 
     else:
-        docente = ProfessorModelForm()
         return render(request, 'register.html', {'docente': docente})
 
         
