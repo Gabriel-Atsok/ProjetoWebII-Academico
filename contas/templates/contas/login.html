@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+
+{% block titleh %}Login{% endblock titleh %}
+
+{% block titulo %}
+
+{% if request.user.is_authenticated %}
+    <p>Bem-vindo, {{request.user}}!</p><br> 
+{% else %}
+    Login
+{% endif %}
+{% endblock titulo %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<h3><a href="{% url 'edit_cadastro' %}">&lt;Clique aqui&gt;</a> para editar sua senha.</h3>
+
+
+{% else %}
+
+  <form>
+      {% csrf_token %}
+      <section class="vh-100 gradient-custom">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                  <div class="card-body p-5 text-center">
+        
+                    <div class="mb-md-5 mt-md-4 pb-5">
+        
+                      <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                      <p class="text-white-50 mb-5">Please enter your login and password!</p>
+        
+                      <div class="form-outline form-white mb-4">
+                        <input type="text" id="usuario" class="form-control form-control-lg" />
+                        <label class="form-label" for="typetextX">Usuário</label>
+                      </div>
+        
+                      <div class="form-outline form-white mb-4">
+                        <input type="password" id="senha1" class="form-control form-control-lg" />
+                        <label class="form-label" for="typePasswordX">Password</label>
+                      </div>
+        
+                      <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+        
+                      <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+        
+        
+                    </div>
+        
+                    <div>
+                      <a href="{% url 'cadastro' %}" class="text-white-50 fw-bold">Sign Up</a>
+                    
+                    </div>
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+{% endif %}
+{% endblock content %}
