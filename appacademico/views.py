@@ -90,17 +90,6 @@ def registrardocente(request):
         docente = ProfessorModelForm()
         return render(request, 'register.html', {'docente': docente}) '''
 
-def registrardiscente(request):
-    if request.method == 'POST':
-        discente = AlunoModelForm(request.POST or None, request.FILES or None)
-        if discente.is_valid():
-            discente.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Aluno cadastrado com sucesso!')
-            return render(request, 'index.html')
-    else:
-        discente = AlunoModelForm()
-        return render(request, 'register.html', {'discente': discente})
 
 def registrardiscente(request):
     discente = AlunoModelForm()
@@ -136,13 +125,13 @@ def registrardiscente(request):
 
         else:
             try:
-                discente = Professor(matricula=matricula, nome=nome,
+                discente = Aluno(matricula=matricula, nome=nome,
                                                 cpf=cpf, telefone=telefone,
                                                 email=email)
                 discente.save()
                 discente = Aluno.objects.all()
                 messages.add_message(request, messages.SUCCESS,
-                                        'Professor cadastrado com sucesso!')
+                                        'Aluno cadastrado com sucesso!')
                 return render(request, 'mostrar_todos.html', {'discente': discente})
             except:
                 messages.add_message(request, messages.SUCCESS,

@@ -3,7 +3,7 @@ from django.db import models
 class Usuario(models.Model):
     matricula=models.AutoField(primary_key=True)
     nome = models.CharField(max_length=150)  
-    cpf = models.IntegerField('cpf')
+    cpf = models.IntegerField()
     telefone=models.IntegerField()
     email=models.EmailField(max_length=50)
 

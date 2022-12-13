@@ -46,14 +46,14 @@
         
                       <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
         
-                      <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                      <button class="btn btn-outline-light btn-lg px-5" type="submit"><a href="{% url 'index' %}">Login</a></button>
         
         
                     </div>
         
                     <div>
-                      <a href="{% url 'cadastro' %}" class="text-white-50 fw-bold">Sign Up</a>
-                    
+                      <a href="{% url 'index' %}" class="text-white-50 fw-bold">Sign Up</a><p><p>
+                      <a type="button" href="{% url 'index' %}" class="btn btn-secondary" value="">Voltar</a>
                     </div>
         
                   </div>
