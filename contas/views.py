@@ -123,3 +123,6 @@ def edit_cadastro(request):
         return redirect('login')
 
     return render(request, 'contas/edit_cadastro.html')
+
+def erro404(request, exception=None):
+    return render(request, '404.html')

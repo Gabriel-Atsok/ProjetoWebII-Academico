@@ -17,12 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404, handler500
+from contas import views
+from appacademico import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('4dem1n/', admin.site.urls),
     path('', include ('appacademico.urls')),
-    path('contas/', include ('contas.urls')),
+    path('contas/', include ('contas.urls')), 
 ]
+
+handler404 = views.erro404
+handler500 = views.erro404
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

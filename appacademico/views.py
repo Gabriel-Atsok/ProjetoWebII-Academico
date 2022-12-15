@@ -291,3 +291,6 @@ def del_turma(request, turma_id):
 
 def resetsenha(request):
     return render(request, 'password.html')
+
+def erro404(request, exception=None):
+    return render(request, '404.html')
