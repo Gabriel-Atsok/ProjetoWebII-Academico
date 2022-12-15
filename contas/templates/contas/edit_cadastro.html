@@ -1,10 +1,12 @@
 {% extends 'index.html' %}
+{% load bootstrap4 %}
 
 {% block titleh %}Editar{% endblock titleh %}
 
 {% block titulo %}Editar Usuário{% endblock titulo %}
 
 {% block conteudo %}
+{% bootstrap_messages %}
 <form method="POST">
   {% csrf_token %}
   <section class="vh-100 gradient-custom">
@@ -20,9 +22,9 @@
                 <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
                 <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeEmailX">Usuário</label>
                   <input type="text" name="usuario" value="{{request.user.username}}" id="typeEmailX"
                     class="form-control form-control-lg" />
-                  <label class="form-label" for="typeEmailX">Usuário</label>
                 </div>
                 <div class="form-outline form-white mb-4">
                   <input type="email" name="email" value="{{request.user.email}}" id="typeEmailX"
@@ -35,13 +37,10 @@
                 </div>
                 <div class="form-outline form-white mb-4">
                   <input type="password" name="senha2" id="senha2" class="form-control form-control-lg" />
-                  <label class="form-label" for="typePasswordX">Repita Senha</label>
-
+                  <label class="form-label" for="typePasswordX">Repita a Senha</label>
                 </div>
-                <button class="btn btn-outline-light btn-lg px-5" type="submitX">Salvar</button>
-                <a type="button" href="{% url 'index' %}" class="btn btn-secondary" value="">Voltar</a>
-
-
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Salvar</button>
+                <a class="btn btn-outline-light btn-lg px-5" href="{% url 'index' %}">Voltar</a>
               </div>
             </div>
           </div>

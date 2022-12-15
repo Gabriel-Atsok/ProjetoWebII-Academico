@@ -1,10 +1,12 @@
 {% extends 'index.html' %}
+{% load bootstrap4 %}
 
 {% block titleh %}Cadastro{% endblock titleh %}
 
 {% block titulo %}Cadastrar Usuário{% endblock titulo %}
 
 {% block content %}
+{% bootstrap_messages %}
 <form method="POST">
     {% csrf_token %}
     <section class="vh-100 gradient-custom">
@@ -17,26 +19,26 @@
                   <div class="mb-md-5 mt-md-4 pb-5">
       
                     <h2 class="fw-bold mb-2 text-uppercase">Cadastro de Usuário</h2>
-                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                    <p class="text-white-50 mb-5">Por favor, cadastre seu usuario!</p>
       
                     <div class="form-outline form-white mb-4">
-                        <input type="text" name="usuario"id="typeTestX" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeTestX">Usuário</label>
+                        <label class="form-label" for="typeTestX">Matricula</label>
+                        <input type="text" name="matricula"id="typeTestX" class="form-control form-control-lg" />  
                       </div>
                       <div class="form-outline form-white mb-4">
-                        <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" />
                         <label class="form-label" for="typeEmailX">Email</label>
+                        <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" />
                       </div>
                       <div class="form-outline form-white mb-4">
-                        <input type="password" name="senha1" id="typePasswordX" class="form-control form-control-lg" />
                         <label class="form-label" for="typeEmailX">Senha</label>
+                        <input type="password" name="senha1" id="typePasswordX" class="form-control form-control-lg" />
                       </div>
                     <div class="form-outline form-white mb-4">
-                      <input type="password" name="senha2" id="typePasswordX" class="form-control form-control-lg" />
                       <label class="form-label" for="typePasswordX">Repita Senha</label>
+                      <input type="password" name="senha2" id="typePasswordX" class="form-control form-control-lg" /><p><br>
                       <button class="btn btn-outline-light btn-lg px-5" type="submit">Salvar</button>
                   </div>
-                  <button class="btn btn-outline-light btn-lg px-5" type="submit">Salvar</button>
+                  <a class="btn btn-outline-light btn-lg px-5" href="{% url 'index' %}">Voltar</a>
                 </div>
               </div>
             </div>

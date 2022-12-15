@@ -3,14 +3,17 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from appacademico.models import Secretario, Professor, Aluno, Disciplina, Turma
+from appacademico.forms import SecretarioModelForm, ProfessorModelForm, AlunoModelForm, DisciplinaModelForm, TurmaModelForm
+
 # Create your views here.
 
 
 def login(request):
     if request.method == "POST":
-        usuario = request.POST.get('usuario')
+        matricula = request.POST.get('matricula')
         senha = request.POST.get('senha')
-        user = auth.authenticate(request, username=usuario, password=senha)
+        user = auth.authenticate(request, username=matricula, password=senha)
 
         if not user:
             messages.error(request, "Usuário ou senha inválidos!")
@@ -29,24 +32,26 @@ def logout(request):
     return redirect('login')
 
 
-#@login_required(login_url='login')
+# @login_required(login_url='login')
 def cadastro(request):
+    discente = Aluno
+    docente = Professor
     if request.method == "POST":
 
-        usuario = request.POST.get('usuario')
-        #nome = request.POST.get('nome')
+        matricula = request.POST.get('matricula')
         #sobrenome = request.POST.get('sobrenome')
         email = request.POST.get('email')
         senha1 = request.POST.get('senha1')
         senha2 = request.POST.get('senha2')
 
-        if not usuario or not email or not senha1 or not senha2:
+        if not matricula or not email or not senha1 or not senha2:
             messages.error(request, "Não pode deixar campos em branco!")
             return render(request, 'contas/cadastro.html')
 
-        if len(usuario) < 4:
-            messages.info(request, "Nome de usuário muito curto!")
-            return render(request, 'contas/cadastro.html')
+        #if len(matricula) == '@' or :
+        #    messages.info(request, "Formato de CPF errado!")
+         #   return render(request, 'contas/cadastro.html')
+
         try:
             validate_email(email)
         except:
@@ -57,7 +62,7 @@ def cadastro(request):
             messages.error(request, "Senhas diferentes!")
             return render(request, 'contas/cadastro.html')
 
-        if User.objects.filter(username=usuario).exists():
+        if User.objects.filter(username=matricula).exists():
             messages.error(request, "Usuário já existe.")
             return render(request, 'contas/cadastro.html')
 
@@ -65,19 +70,32 @@ def cadastro(request):
             messages.error(request, "Email já existe.")
             return render(request, 'contas/cadastro.html')
 
-        messages.success(request, "Registrado com sucesso!")
+        if discente.objects.filter(matricula=matricula).exists():
+            user = User.objects.create_user(
+                username=matricula, password=senha1, email=email)
 
-        user = User.objects.create_user(username=usuario, email=email,
-                                        password=senha1)
+            user.save()
+            messages.success(request, "Usuário registrado com sucesso!")
+            
+            return render(request, 'contas/cadastro.html')
 
-        user.save()
+        elif docente.objects.filter(matricula=matricula).exists():
+            user = User.objects.create_user(
+                username=matricula, password=senha1, email=email)
 
-        return redirect('login')
+            user.save()
+            messages.success(request, "Usuário registrado com sucesso!")
+            
+            return render(request, 'contas/cadastro.html')
+
+        else:
+            messages.error(request, "Usuário não registrado!")
+            return render(request, 'contas/cadastro.html')
 
     return render(request, 'contas/cadastro.html')
 
 
-#@login_required(login_url='login')
+# @login_required(login_url='login')
 def edit_cadastro(request):
     if request.method == "POST":
         senha1 = request.POST.get("senha1")

@@ -50,6 +50,10 @@ def registrardocente(request):
         if len(cpf) != 11:
             messages.info(request, "Formato de CPF errado!")
             return render(request, 'register.html', {'docente': docente})
+        
+        if Professor.objects.filter(cpf=cpf).exists():
+            messages.error(request, "CPF já existe.")
+            return render(request, 'register.html', {'discente': discente})
 
         if len(telefone) != 11:
             messages.info(request, "Formato de número incorreto errado!")
@@ -111,6 +115,10 @@ def registrardiscente(request):
 
         if len(cpf) != 11:
             messages.info(request, "Formato de CPF errado!")
+            return render(request, 'register.html', {'discente': discente})
+
+        if Aluno.objects.filter(cpf=cpf).exists():
+            messages.error(request, "CPF já existe.")
             return render(request, 'register.html', {'discente': discente})
 
         if len(telefone) != 11:
