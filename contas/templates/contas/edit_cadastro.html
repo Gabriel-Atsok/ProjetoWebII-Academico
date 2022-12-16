@@ -5,7 +5,7 @@
 
 {% block titulo %}Editar Usuário{% endblock titulo %}
 
-{% block conteudo %}
+{% block content %}
 {% bootstrap_messages %}
 <form method="POST">
   {% csrf_token %}
@@ -48,4 +48,4 @@
       </div>
   </section>
 </form>
-{% endblock conteudo %}
+{% endblock content %}

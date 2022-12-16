@@ -32,7 +32,7 @@ def logout(request):
     return redirect('login')
 
 
-# @login_required(login_url='login')
+
 def cadastro(request):
     discente = Aluno
     docente = Professor
@@ -90,12 +90,12 @@ def cadastro(request):
 
         else:
             messages.error(request, "Usuário não registrado!")
-            return render(request, 'contas/cadastro.html')
+            return render(request, 'contas/login.html')
 
     return render(request, 'contas/cadastro.html')
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def edit_cadastro(request):
     if request.method == "POST":
         senha1 = request.POST.get("senha1")

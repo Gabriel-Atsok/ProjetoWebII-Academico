@@ -15,7 +15,7 @@ class ProfessorModelForm(forms.ModelForm):
 class AlunoModelForm(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ['matricula', 'nome', 'cpf', 'telefone', 'email']
+        fields = ['matricula', 'nome', 'cpf', 'telefone', 'email', 'turma']
 
     def clean_nome(self):
         nome = self.cleaned_data['nome']
@@ -32,5 +32,5 @@ class DisciplinaModelForm(forms.ModelForm):
 class TurmaModelForm(forms.ModelForm):
     class Meta:
         model = Turma
-        fields = ['turma_id' ,'nome_turma','aluno', 'disciplinas']
+        fields = ['turma_id' ,'nome_turma', 'disciplinas']
 

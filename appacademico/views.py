@@ -28,7 +28,7 @@ def login(request):
     return render(request, 'contas/login.html')
     return render(request, 'login.html')
 
-
+@login_required(login_url='login')
 def registrardocente(request):
     docente = ProfessorModelForm()
     if request.method == 'POST':
@@ -94,7 +94,7 @@ def registrardocente(request):
         docente = ProfessorModelForm()
         return render(request, 'register.html', {'docente': docente}) '''
 
-
+@login_required(login_url='login')
 def registrardiscente(request):
     discente = AlunoModelForm()
     if request.method == 'POST':
@@ -147,7 +147,7 @@ def registrardiscente(request):
     else:
         return render(request, 'register.html', {'discente': discente})
 
-
+@login_required(login_url='login')
 def registrardisciplina(request):
     if request.method == 'POST':
         disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None)
@@ -155,12 +155,12 @@ def registrardisciplina(request):
             disciplina.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Disciplina cadastrada com sucesso!')
-            return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
+            return redirect('disciplinas')
     else:
         disciplina = DisciplinaModelForm()
         return render(request, 'register.html', {'disciplina': disciplina})
 
-
+@login_required(login_url='login')
 def registrarturma(request):
     if request.method == 'POST':
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
@@ -176,27 +176,27 @@ def registrarturma(request):
         turma = TurmaModelForm()
         return render(request, 'register.html', {'turmas': turma})
 
-
+@login_required(login_url='login')
 def docentes(request):
     docente = Professor.objects.all()
     return render(request, 'mostrar_todos.html', {'docente': docente})
 
-
+@login_required(login_url='login')
 def discentes(request):
     discente = Aluno.objects.all()
     return render(request, 'mostrar_todos.html', {'discente': discente})
 
-
+@login_required(login_url='login')
 def disciplinas(request):
     disciplina = Disciplina.objects.all()
     return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
 
-
+@login_required(login_url='login')
 def turmas(request):
     turma = Turma.objects.all()
     return render(request, 'mostrar_todos.html', {'turmas': turma})
 
-
+@login_required(login_url='login')
 def editar_disciplina(request, disciplina_id):
     disciplinaobject = get_object_or_404(Disciplina, pk=disciplina_id)
     disciplina = DisciplinaModelForm(instance=disciplinaobject)
@@ -212,7 +212,7 @@ def editar_disciplina(request, disciplina_id):
             return render(request, 'editar_todos.html', {'disciplina': disciplina})
     return render(request, 'editar_todos.html', {'disciplina': disciplina})
 
-
+@login_required(login_url='login')
 def editar_discente(request, matricula):
     discentenaobject = get_object_or_404(Aluno, pk=matricula)
     discente = AlunoModelForm(instance=discentenaobject)
@@ -227,7 +227,7 @@ def editar_discente(request, matricula):
             return render(request, 'editar_todos.html', {'discente': discente})
     return render(request, 'editar_todos.html', {'discente': discente})
 
-
+@login_required(login_url='login')
 def editar_docente(request, matricula):
     docentenaobject = get_object_or_404(Professor, pk=matricula)
     docente = ProfessorModelForm(instance=docentenaobject)
@@ -242,7 +242,7 @@ def editar_docente(request, matricula):
             return render(request, 'editar_todos.html', {'docente': docente})
     return render(request, 'editar_todos.html', {'docente': docente})
 
-
+@login_required(login_url='login')
 def editar_turma(request, turma_id):
     turmaobject = get_object_or_404(Turma, pk=turma_id)
     turma = TurmaModelForm(instance=turmaobject)
@@ -258,7 +258,7 @@ def editar_turma(request, turma_id):
             return render(request, 'editar_todos.html', {'turmas': turma})
     return render(request, 'editar_todos.html', {'turmas': turma})
 
-
+@login_required(login_url='login')
 def del_discente(request, matricula):
     discente = Aluno.objects.get(matricula=matricula)
     discente.delete()
@@ -266,7 +266,7 @@ def del_discente(request, matricula):
         request, f'{discente.nome.upper()} excluído(a) com sucesso!')
     return redirect('discentes')
 
-
+@login_required(login_url='login')
 def del_docente(request, matricula):
     docente = Professor.objects.get(matricula=matricula)
     docente.delete()
@@ -274,7 +274,7 @@ def del_docente(request, matricula):
         request, f'{docente.nome.upper()} excluído(a) com sucesso!')
     return redirect('docentes')
 
-
+@login_required(login_url='login')
 def del_disciplina(request, disciplina_id):
     disciplina = Disciplina.objects.get(disciplina_id=disciplina_id)
     disciplina.delete()
@@ -282,7 +282,7 @@ def del_disciplina(request, disciplina_id):
         request, f'{disciplina.nome_disciplina.upper()} excluído(a) com sucesso!')
     return redirect('disciplinas')
 
-
+@login_required(login_url='login')
 def del_turma(request, turma_id):
     turma = Turma.objects.get(turma_id=turma_id)
     turma.delete()
