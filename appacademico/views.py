@@ -166,7 +166,6 @@ def registrarturma(request):
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
         if turma.is_valid():
             turma.save()
-            turma.save_m2m()
             messages.add_message(request, messages.SUCCESS,
                                  'Disciplina cadastrada com sucesso!')
             return redirect('turmas')
