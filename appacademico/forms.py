@@ -27,10 +27,10 @@ class AlunoModelForm(forms.ModelForm):
 class DisciplinaModelForm(forms.ModelForm):
     class Meta:
         model = Disciplina
-        fields = ['disciplina_id', 'nome_disciplina', 'professor', 'turma_id']
+        fields = ['disciplina_id', 'nome_disciplina', 'professor']
 
 class TurmaModelForm(forms.ModelForm):
     class Meta:
         model = Turma
-        fields = ['turma_id' ,'nome_turma','aluno']
+        fields = ['turma_id' ,'nome_turma','alunos', 'disciplinas']
 

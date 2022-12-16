@@ -38,8 +38,10 @@ Turmas
             <thead>
                 {% if turmas %}
                 <tr>
-                    <th>Código da Turma</th>
+                    <th>Tuma</th>
                     <th>Disciplinas</th>
+                    <th>Alunos</th>
+                    <th>Professores</th>
                     <th>Operação</th>
                 </tr>
                 {% elif disciplina %}
@@ -125,10 +127,14 @@ Turmas
                 </tr>
                 {% endfor %}
                 {% elif turmas %}
-                {% for turma in turmas %}
+                {% for turma in turmas%}
                 <tr>
-                    <td>{{turma.turma_id}}</td>
                     <td>{{turma.nome_turma}}</td>
+                    {% for turma.disciplinas in turmas %}
+                    <td>{{turma.disciplinas}}</td>
+                    {%endfor%}
+                    <td>{{turma.alunos}}</td>
+                    <td>{{turma.disciplinas.professor}}</td>
                     <td>
                         <a href="{% url 'editar_turma' turma.turma_id %}"
                             style="padding: 10px; color: rgb(0, 255, 0); font-size: 25px;"><i

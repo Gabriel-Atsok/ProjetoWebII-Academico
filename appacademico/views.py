@@ -155,7 +155,7 @@ def registrardisciplina(request):
             disciplina.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Disciplina cadastrada com sucesso!')
-            return render(request, 'index.html')
+            return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
     else:
         disciplina = DisciplinaModelForm()
         return render(request, 'register.html', {'disciplina': disciplina})
@@ -166,6 +166,7 @@ def registrarturma(request):
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
         if turma.is_valid():
             turma.save()
+            turma.save_m2m()
             messages.add_message(request, messages.SUCCESS,
                                  'Disciplina cadastrada com sucesso!')
             return redirect('turmas')
@@ -250,6 +251,7 @@ def editar_turma(request, turma_id):
         turma = TurmaModelForm(request.POST, instance=turmaobject)
         if (turma.is_valid()):
             turma.save()
+            turma.save_m2m()
             messages.success(
                 request, f'{turmaobject.turma_id} editado(a) com sucesso!')
             return redirect('turmas')

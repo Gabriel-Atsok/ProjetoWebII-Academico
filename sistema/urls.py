@@ -22,7 +22,7 @@ from contas import views
 from appacademico import views
 
 urlpatterns = [
-    path('4dem1n/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include ('appacademico.urls')),
     path('contas/', include ('contas.urls')), 
 ]
