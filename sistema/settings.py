@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'appacademico',
     'bootstrap4',
     'contas',
+    'rolepermissions',
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,7 @@ MEDIA_ROOT= BASE_DIR / 'assets'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+ROLEPERMISSIONS_MODULE = 'sistema.roles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

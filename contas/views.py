@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from appacademico.models import Secretario, Professor, Aluno, Disciplina, Turma
 from appacademico.forms import SecretarioModelForm, ProfessorModelForm, AlunoModelForm, DisciplinaModelForm, TurmaModelForm
-
+from rolepermissions.roles import assign_role
 # Create your views here.
 
 
@@ -73,8 +73,8 @@ def cadastro(request):
         if discente.objects.filter(matricula=matricula).exists():
             user = User.objects.create_user(
                 username=matricula, password=senha1, email=email)
-
             user.save()
+            assign_role(user, 'aluno')
             messages.success(request, "Usuário registrado com sucesso!")
             
             return render(request, 'contas/cadastro.html')
@@ -82,8 +82,8 @@ def cadastro(request):
         elif docente.objects.filter(matricula=matricula).exists():
             user = User.objects.create_user(
                 username=matricula, password=senha1, email=email)
-
             user.save()
+            assign_role(user, 'professor')
             messages.success(request, "Usuário registrado com sucesso!")
             
             return render(request, 'contas/cadastro.html')

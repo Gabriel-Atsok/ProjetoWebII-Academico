@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import handler404, handler500
+from django.conf.urls import handler404, handler500, handler403, handler400
 from contas import views
 from appacademico import views
 
@@ -29,6 +29,7 @@ urlpatterns = [
 
 handler404 = views.erro404
 handler500 = views.erro404
+handler403 = views.erro403
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

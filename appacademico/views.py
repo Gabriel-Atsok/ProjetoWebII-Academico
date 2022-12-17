@@ -1,33 +1,29 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from django.contrib import messages,auth
 from django.core.validators import validate_email
-
 from .models import Secretario, Professor, Aluno, Disciplina, Turma
 from .forms import SecretarioModelForm, ProfessorModelForm, AlunoModelForm, DisciplinaModelForm, TurmaModelForm
-
+from rolepermissions.decorators import has_role_decorator
 
 def index(request):
     return render(request, 'index.html')
 
-
 def login(request):
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
+    if request.method == "POST":
+        matricula = request.POST.get('matricula')
         senha = request.POST.get('senha')
-        user = auth.authenticate(request, username=usuario, password=senha)
+        user = auth.authenticate(request, username=matricula, password=senha)
 
         if not user:
-            messages.error(request, 'Usuário ou senha inválidos!')
+            messages.error(request, "Usuário ou senha inválidos!")
             return render(request, 'contas/login.html')
         else:
             auth.login(request, user)
-            messages.success(request, 'Login realizado com sucesso!')
-            return redirect('login')
+            messages.success(request, "Login realizado com sucesso!")
+            return redirect('index')
 
     return render(request, 'contas/login.html')
-    return render(request, 'login.html')
-
 @login_required(login_url='login')
 def registrardocente(request):
     docente = ProfessorModelForm()
@@ -147,7 +143,7 @@ def registrardiscente(request):
     else:
         return render(request, 'register.html', {'discente': discente})
 
-@login_required(login_url='login')
+@has_role_decorator('professor')
 def registrardisciplina(request):
     if request.method == 'POST':
         disciplina = DisciplinaModelForm(request.POST or None, request.FILES or None)
@@ -165,14 +161,9 @@ def registrarturma(request):
     if request.method == 'POST':
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
         if turma.is_valid():
-            print("CHECKPOINT----------------------------------------------------------- 1")
-            # O erro esta aqui 
-            turma.save(commit=False)
-            #turma.save_m2m()
-            # O erro esta aqui 
-            print("CHECKPOINT------------------------------------------------------------------------------------------ 2")
+            turma.save()
             messages.add_message(request, messages.SUCCESS,
-                                 'Turma cadastrada com sucesso!')
+                                 'Disciplina cadastrada com sucesso!')
             return redirect('turmas')
         else:
             turma = TurmaModelForm()
@@ -191,7 +182,7 @@ def discentes(request):
     discente = Aluno.objects.all()
     return render(request, 'mostrar_todos.html', {'discente': discente})
 
-@login_required(login_url='login')
+@has_role_decorator('professor')
 def disciplinas(request):
     disciplina = Disciplina.objects.all()
     return render(request, 'mostrar_todos.html', {'disciplina': disciplina})
@@ -201,7 +192,7 @@ def turmas(request):
     turma = Turma.objects.all()
     return render(request, 'mostrar_todos.html', {'turmas': turma})
 
-@login_required(login_url='login')
+@has_role_decorator('professor')
 def editar_disciplina(request, disciplina_id):
     disciplinaobject = get_object_or_404(Disciplina, pk=disciplina_id)
     disciplina = DisciplinaModelForm(instance=disciplinaobject)
@@ -300,3 +291,7 @@ def resetsenha(request):
 
 def erro404(request, exception=None):
     return render(request, '404.html')
+
+def erro403(request, exception=None):
+    return render(request, '403.html')
+
