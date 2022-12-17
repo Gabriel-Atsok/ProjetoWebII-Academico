@@ -32,7 +32,7 @@ Cadastrar Turma
 
 {% block content %}
 {% bootstrap_messages %}
-<form method="post" class="form" enctype="multipart/form-data" autocomplete="off">
+<form method="POST" class="form" enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
 
     {% if docente %}

@@ -26,7 +26,7 @@ class Disciplina(models.Model):
 class Turma(models.Model):
     turma_id = models.AutoField(primary_key=True)
     nome_turma = models.CharField(max_length=150)
-    disciplinas = models.ManyToManyField(Disciplina, related_name='disciplinas')
+    disciplinas = models.ManyToManyField(Disciplina, related_name='disciplinas', null=True, blank=True)
 
     def __str__(self):
         return self.nome_turma
@@ -36,7 +36,7 @@ class Secretario(Usuario):
     pass
 
 class Aluno(Usuario):
-    turma = models.ForeignKey(Turma, on_delete=models.DO_NOTHING)
+    turma = models.ForeignKey(Turma, on_delete=models.DO_NOTHING, null=True,blank=True)
     pass
 
     

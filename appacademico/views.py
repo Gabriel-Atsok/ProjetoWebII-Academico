@@ -165,9 +165,14 @@ def registrarturma(request):
     if request.method == 'POST':
         turma = TurmaModelForm(request.POST or None, request.FILES or None)
         if turma.is_valid():
-            turma.save()
+            print("CHECKPOINT----------------------------------------------------------- 1")
+            # O erro esta aqui 
+            turma.save(commit=False)
+            #turma.save_m2m()
+            # O erro esta aqui 
+            print("CHECKPOINT------------------------------------------------------------------------------------------ 2")
             messages.add_message(request, messages.SUCCESS,
-                                 'Disciplina cadastrada com sucesso!')
+                                 'Turma cadastrada com sucesso!')
             return redirect('turmas')
         else:
             turma = TurmaModelForm()
